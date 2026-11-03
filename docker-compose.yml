@@ -3,7 +3,10 @@ services:
     build: .
     container_name: tg-voice-transcribation
     restart: unless-stopped
-    env_file: .env
+    environment:
+      # Значения берутся из .env (локально) или из Environment в Dokploy.
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - WHISPER_MODEL=${WHISPER_MODEL:-base}
     volumes:
       # Кэш моделей Whisper переживает пересборку контейнера.
       - whisper-cache:/cache
