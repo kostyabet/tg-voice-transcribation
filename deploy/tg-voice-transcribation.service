@@ -1,0 +1,17 @@
+[Unit]
+Description=Telegram voice transcription bot (Whisper)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Поменяй User и пути под свой сервер.
+User=tgbot
+WorkingDirectory=/opt/tg-voice-transcribation
+EnvironmentFile=/opt/tg-voice-transcribation/.env
+ExecStart=/opt/tg-voice-transcribation/.venv/bin/python bot.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

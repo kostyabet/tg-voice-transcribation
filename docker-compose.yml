@@ -1,0 +1,12 @@
+services:
+  bot:
+    build: .
+    container_name: tg-voice-transcribation
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Кэш моделей Whisper переживает пересборку контейнера.
+      - whisper-cache:/cache
+
+volumes:
+  whisper-cache:
